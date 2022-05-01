@@ -11,6 +11,8 @@ YELLOW = (255, 236, 0)
 GREEN = (43, 159, 3)
 GRID_SIZE = 20
 
+#Hola ivan 
+#Hola ester
 class Snake:
 
     def __init__(self):
