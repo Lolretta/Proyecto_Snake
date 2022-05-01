@@ -14,6 +14,7 @@ GRID_SIZE = 20
 #Hola ivan 
 #Hola ester
 #Hola chicos estamos githubteando
+#Esta es la segunda prueba de subida
 class Snake:
 
     def __init__(self):
