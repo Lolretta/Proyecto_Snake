@@ -13,6 +13,7 @@ GRID_SIZE = 20
 
 #Hola ivan 
 #Hola ester
+#Hola chicos estamos githubteando
 class Snake:
 
     def __init__(self):
