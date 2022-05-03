@@ -1,3 +1,4 @@
+from curses import window
 import random
 import sys
 import pygame
@@ -149,6 +150,8 @@ class Snake:
             self.best_score=self.length
         self.length=1
 
+    
+
 def message(score):
     root=tk.Tk()
     root.withdraw()
@@ -157,6 +160,8 @@ def message(score):
         root.destroy()
     except:
         pass
+
+
 
 
 
@@ -172,6 +177,18 @@ class Food:
     def draw_food(self, window):
         pygame.draw.rect(window, PINK, [self.food_position[0], self.food_position[1], 20, 20])
 
+class Block:
+    def __init__(self):
+        self.block_position=(0,0)
+        self.random_position()
+
+    def random_position(self):
+        self.block_position=[(random.randrange(0,680,20),random.randrange(0,680,20)) for i in range(5)]
+
+    def draw_block(self, window):
+        for i, value in enumerate(self.block_position):
+            pygame.draw.rect(window,BLACK,[value[0],value[1],20,20])
+
 
 def check_food(snake, food, window):
     if tuple(snake.get_snake_head()) == food.food_position:
@@ -185,6 +202,12 @@ def check_food(snake, food, window):
 
         if snake.length> snake.best_score:
             snake.best_score+=1
+
+
+def check_block(snake,block):
+    if tuple(snake.get_snake_head()) in block.block_position:
+        block.random_position()
+        snake.reset()
 
 
 def draw_grid(window):
@@ -208,6 +231,7 @@ def main():
     clock = pygame.time.Clock()
     snake = Snake()
     food = Food()
+    block = Block()
 
     game_font = pygame.font.SysFont("Helvetica", 28)
 
@@ -218,12 +242,20 @@ def main():
         draw_grid(window)
         snake.move_snake(window)
 
+        check_block(snake,block)
         check_food(snake, food, window)
 
         score = game_font.render(f"Score {snake.length}", True, BLACK)
         window.blit(score, (5, 0))
         best_score = game_font.render(f"Best score {snake.best_score}", True, BLACK)
         window.blit(best_score, (5, 30))
+
+        block.draw_block(window)
+
+        while True:
+            if food.food_position in block.block_position:
+                food.random_position()
+            break
 
         food.draw_food(window)
         pygame.display.update()
