@@ -1,6 +1,8 @@
 import random
 import sys
 import pygame
+import tkinter as tk
+from tkinter import messagebox as mBox
 
 HEIGHT = 700
 WIDTH = 700
@@ -11,10 +13,7 @@ YELLOW = (255, 236, 0)
 GREEN = (43, 159, 3)
 GRID_SIZE = 20
 
-#Hola ivan 
-#Hola ester
-#Hola chicos estamos githubteando
-#Esta es la segunda prueba de subida
+
 class Snake:
 
     def __init__(self):
@@ -108,6 +107,8 @@ class Snake:
                 continue
 
             pygame.draw.rect(window, PURPLE, [body[0], body[1], 20, 20])
+
+        self.check_error(window)
     
     def check_valid_movement(self, next_mov):
 
@@ -135,6 +136,30 @@ class Snake:
         self.snake_body.insert(0, list(value))
         self.draw_snake(window)
 
+    def check_error(self, window):
+        if self.get_snake_head() in self.snake_body[2:]:
+            self.reset()
+    
+    def reset(self):
+        message(self.length)
+        self.snake_body=[[220,220]]
+        self.actual_movements=random.choice(["right","left","up","down"])
+        if self.length>self.temp_score:
+            self.temp_score=self.length
+            self.best_score=self.length
+        self.length=1
+
+def message(score):
+    root=tk.Tk()
+    root.withdraw()
+    mBox.showerror("YOU LOST",f"Your score is: {score}")
+    try:
+        root.destroy()
+    except:
+        pass
+
+
+
 class Food:
 
     def __init__(self):
@@ -157,6 +182,10 @@ def check_food(snake, food, window):
         food.draw_food(window)
 
         snake.length += 1
+
+        if snake.length> snake.best_score:
+            snake.best_score+=1
+
 
 def draw_grid(window):
     window.fill(GREEN)
@@ -193,7 +222,7 @@ def main():
 
         score = game_font.render(f"Score {snake.length}", True, BLACK)
         window.blit(score, (5, 0))
-        best_score = game_font.render("Best score", True, BLACK)
+        best_score = game_font.render(f"Best score {snake.best_score}", True, BLACK)
         window.blit(best_score, (5, 30))
 
         food.draw_food(window)
