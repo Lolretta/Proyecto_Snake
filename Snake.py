@@ -1,4 +1,4 @@
-from curses import window
+
 import random
 import sys
 import pygame
@@ -14,6 +14,8 @@ YELLOW = (255, 236, 0)
 GREEN = (43, 159, 3)
 GRID_SIZE = 20
 
+main_image = pygame.image.load("InicioPagSnake.png")
+pause_image = pygame.image.load("Continuaroquitar.png")
 
 class Snake:
 
@@ -222,6 +224,18 @@ def draw_grid(window):
         pygame.draw.line(window, BLACK, (x, 0), (x, WIDTH))
         pygame.draw.line(window, BLACK, (0, y), (HEIGHT, y))
 
+def start_menu(star, window):
+    window.blit(main_image, (0,0))
+    pygame.display.update()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key:
+                return False
+    return True
+
 def main():
 
     pygame.init()
@@ -234,10 +248,13 @@ def main():
     block = Block()
 
     game_font = pygame.font.SysFont("Helvetica", 28)
+    start = True
 
     while True:
         
         clock.tick(12)
+        while start:
+            start = start_menu(start, window)
 
         draw_grid(window)
         snake.move_snake(window)
@@ -259,5 +276,7 @@ def main():
 
         food.draw_food(window)
         pygame.display.update()
+
+
 
 main()
