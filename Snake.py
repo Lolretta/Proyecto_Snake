@@ -1,4 +1,3 @@
-from curses import window
 import random
 import sys
 import pygame
