@@ -151,8 +151,6 @@ class Snake:
             self.best_score=self.length
         self.length=1
 
-    
-
 def message(score):
     root=tk.Tk()
     root.withdraw()
@@ -161,9 +159,6 @@ def message(score):
         root.destroy()
     except:
         pass
-
-
-
 
 
 class Food:
