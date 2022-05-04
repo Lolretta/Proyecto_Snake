@@ -10,7 +10,7 @@ BLACK = (0, 0, 0)
 PINK = (255, 0, 122)
 PURPLE = (100, 0, 255)
 YELLOW = (255, 236, 0)
-GREEN = (43, 159, 3)
+DSGREEN = (143, 188, 143)
 GRID_SIZE = 20
 
 main_image = pygame.image.load("InicioPagSnake.png")
@@ -210,7 +210,7 @@ def check_block(snake,block):
 
 
 def draw_grid(window):
-    window.fill(GREEN)
+    window.fill(DSGREEN)
     x = 0
     y = 0
 
