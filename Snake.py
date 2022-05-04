@@ -10,12 +10,9 @@ BLACK = (0, 0, 0)
 PINK = (255, 0, 122)
 PURPLE = (100, 0, 255)
 YELLOW = (255, 236, 0)
-DSGREEN = (143, 188, 143)
-WHITE = (255,255,255)
+GREEN = (43, 159, 3)
 GRID_SIZE = 20
 
-main_image = pygame.image.load("InicioPagSnake.png")
-pause_image = pygame.image.load("Continuaroquitar.png")
 
 class Snake:
 
@@ -152,8 +149,6 @@ class Snake:
             self.best_score=self.length
         self.length=1
 
-    
-
 def message(score):
     root=tk.Tk()
     root.withdraw()
@@ -162,9 +157,6 @@ def message(score):
         root.destroy()
     except:
         pass
-
-
-
 
 
 class Food:
@@ -213,7 +205,7 @@ def check_block(snake,block):
 
 
 def draw_grid(window):
-    window.fill(DSGREEN)
+    window.fill(GREEN)
     x = 0
     y = 0
 
@@ -223,18 +215,6 @@ def draw_grid(window):
 
         pygame.draw.line(window, BLACK, (x, 0), (x, WIDTH))
         pygame.draw.line(window, BLACK, (0, y), (HEIGHT, y))
-
-def start_menu(star, window):
-    window.blit(main_image, (0,0))
-    pygame.display.update()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key:
-                return False
-    return True
 
 def main():
 
@@ -249,8 +229,6 @@ def main():
 
     game_font = pygame.font.SysFont("Helvetica", 28)
 
-    start = True
-
     while True:
         
         clock.tick(12)
@@ -262,7 +240,7 @@ def main():
         check_food(snake, food, window)
 
         score = game_font.render(f"Score {snake.length}", True, BLACK)
-        window.blit(score, (2, 0))
+        window.blit(score, (5, 0))
         best_score = game_font.render(f"Best score {snake.best_score}", True, BLACK)
         window.blit(best_score, (5, 30))
 
