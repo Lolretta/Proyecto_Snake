@@ -14,6 +14,8 @@ DSGREEN = (143, 188, 143)
 WHITE = (255,255,255)
 GRID_SIZE = 20
 
+main_image = pygame.image.load("InicioPagSnake.png")
+pause_image = pygame.image.load("Continuaroquitar.png")
 
 class Snake:
 
@@ -222,6 +224,18 @@ def draw_grid(window):
         pygame.draw.line(window, BLACK, (x, 0), (x, WIDTH))
         pygame.draw.line(window, BLACK, (0, y), (HEIGHT, y))
 
+def start_menu(star, window):
+    window.blit(main_image, (0,0))
+    pygame.display.update()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key:
+                return False
+    return True
+
 def main():
 
     pygame.init()
@@ -234,6 +248,8 @@ def main():
     block = Block()
 
     game_font = pygame.font.SysFont("Helvetica", 28)
+
+    start = True
 
     while True:
         
