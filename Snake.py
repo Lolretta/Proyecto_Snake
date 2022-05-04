@@ -64,6 +64,9 @@ class Snake:
                         continue
 
                     self.actual_movements = "down"
+
+                if event.key == pygame.K_p:
+                    pause_game(window)
                 
         self.snake_movements(window)
 
@@ -229,6 +232,28 @@ def start_menu(star, window):
             if event.key:
                 return False
     return True
+
+def pause_game(window):
+    paused = True
+
+    while paused:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_c:
+                    paused = False
+                
+                elif event.key == pygame.K_q:
+                    pygame.quit()
+                    sys.exit()
+
+        window.blit(pause_image, (0, 0))
+        pygame.display.update()
+            
+
 
 def main():
 
