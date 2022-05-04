@@ -10,7 +10,8 @@ BLACK = (0, 0, 0)
 PINK = (255, 0, 122)
 PURPLE = (100, 0, 255)
 YELLOW = (255, 236, 0)
-GREEN = (43, 159, 3)
+DSGREEN = (143, 188, 143)
+WHITE = (255,255,255)
 GRID_SIZE = 20
 
 
@@ -210,7 +211,7 @@ def check_block(snake,block):
 
 
 def draw_grid(window):
-    window.fill(GREEN)
+    window.fill(DSGREEN)
     x = 0
     y = 0
 
@@ -245,7 +246,7 @@ def main():
         check_food(snake, food, window)
 
         score = game_font.render(f"Score {snake.length}", True, BLACK)
-        window.blit(score, (5, 0))
+        window.blit(score, (2, 0))
         best_score = game_font.render(f"Best score {snake.best_score}", True, BLACK)
         window.blit(best_score, (5, 30))
 
