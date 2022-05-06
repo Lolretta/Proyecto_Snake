@@ -7,11 +7,13 @@ from tkinter import messagebox as mBox
 HEIGHT = 700
 WIDTH = 700
 BLACK = (0, 0, 0)
-PINK = (255, 0, 122)
-PURPLE = (100, 0, 255)
-YELLOW = (255, 236, 0)
-GREEN = (43, 159, 3)
+RED = (255, 0, 0)
+BODY_COLOR = (0,0,0)
+HEAD_COLOR = (225,225,225)
+DSGREEN = (154,197,56)
 GRID_SIZE = 20
+WHITE = (255,255,255)
+GRAY = (0,0,0)
 
 main_image = pygame.image.load("InicioPagSnake.png")
 pause_image = pygame.image.load("Continuaroquitar.png")
@@ -108,10 +110,10 @@ class Snake:
         for idx, body in enumerate(self.snake_body):
 
             if idx == 0:
-                pygame.draw.rect(window, YELLOW, [body[0], body[1], 20, 20])
+                pygame.draw.rect(window, HEAD_COLOR, [body[0], body[1], 20, 20])
                 continue
 
-            pygame.draw.rect(window, PURPLE, [body[0], body[1], 20, 20])
+            pygame.draw.rect(window, BODY_COLOR, [body[0], body[1], 20, 20])
 
         self.check_error(window)
     
@@ -174,7 +176,7 @@ class Food:
         self.food_position = (random.randrange(0, 680, 20), random.randrange(0, 680, 20))
 
     def draw_food(self, window):
-        pygame.draw.rect(window, PINK, [self.food_position[0], self.food_position[1], 20, 20])
+        pygame.draw.rect(window, RED, [self.food_position[0], self.food_position[1], 20, 20])
 
 class Block:
     def __init__(self):
@@ -186,7 +188,7 @@ class Block:
 
     def draw_block(self, window):
         for i, value in enumerate(self.block_position):
-            pygame.draw.rect(window,BLACK,[value[0],value[1],20,20])
+            pygame.draw.rect(window,GRAY,[value[0],value[1],20,20])
 
 
 def check_food(snake, food, window):
@@ -210,7 +212,7 @@ def check_block(snake,block):
 
 
 def draw_grid(window):
-    window.fill(GREEN)
+    window.fill(DSGREEN)
     x = 0
     y = 0
 
@@ -282,9 +284,9 @@ def main():
         check_food(snake, food, window)
 
         score = game_font.render(f"Score {snake.length}", True, BLACK)
-        window.blit(score, (5, 0))
+        window.blit(score, (0, 0))
         best_score = game_font.render(f"Best score {snake.best_score}", True, BLACK)
-        window.blit(best_score, (5, 30))
+        window.blit(best_score, (0, 30))
 
         block.draw_block(window)
 
